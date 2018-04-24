@@ -1,0 +1,57 @@
+environment:
+  matrix:
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      VS_VERSION: 2017
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+      VS_VERSION: 2017
+      ARCHITECTURE: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      VS_VERSION: 2015
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+      VS_VERSION: 2015
+      ARCHITECTURE: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2013
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2013
+      ARCHITECTURE: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2012
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2012
+      ARCHITECTURE: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2010
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2010
+      ARCHITECTURE: x64
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2008
+      ARCHITECTURE: x86
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2013
+      VS_VERSION: 2008
+      ARCHITECTURE: x64
+
+branches:
+  only:
+    - master
+
+skip_commits:
+  files:
+    - bin/
+    - .gitignore
+    - LICENSE
+    - README.md
+
+version: "Build {build}"
+
+build_script:
+  - call compile.bat %VS_VERSION% %ARCHITECTURE%
+
+test_script:
+  - tester.exe || echo Failed && ver>NUL
